@@ -44,5 +44,25 @@ terraform plan|apply \
 Then create the bucket with the Ossutil command line tool:
 ```bash
 ossutil mb oss://wah-storage -e oss-[region].aliyuncs.com
-````
+```
+
+#### [Accelerated Content Delivery](https://www.alibabacloud.com/solutions/hosting/Accelerated-Content-Delivery)
+
+Run the following commands to create the infrastructure :
+
+```bash
+cd hosting/web-application-hosting
+terraform init
+terraform plan|apply \
+  --var 'solution_name=acd' \
+  -var-file=parameters.tfvars \
+  -state=terraform.tfstate
+```
+
+Then create the bucket with the Ossutil command line tool:
+```bash
+ossutil mb oss://acd-storage -e oss-[region].aliyuncs.com
+```
+
+Finally create a CDN domain name pointing to the SLB public ip by following this [documentation](https://www.alibabacloud.com/help/doc-detail/27116.htm?spm=a3c0i.o27115en.b99.22.5851d5afSXJzo8)
 
