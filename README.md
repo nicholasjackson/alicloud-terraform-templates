@@ -66,3 +66,22 @@ ossutil mb oss://acd-storage -e oss-[region].aliyuncs.com
 
 Finally create a CDN domain name pointing to the SLB public ip by following this [documentation](https://www.alibabacloud.com/help/doc-detail/27116.htm?spm=a3c0i.o27115en.b99.22.5851d5afSXJzo8)
 
+#### [Auto Scaling](https://www.alibabacloud.com/solutions/hosting/Auto-Scaling)
+
+Run the following commands to create the infrastructure :
+
+```bash
+cd hosting/auto-scaling
+terraform init
+terraform plan|apply \
+  --var 'solution_name=as' \
+  -var-file=parameters.tfvars \
+  -state=terraform.tfstate
+```
+
+Then create the bucket with the Ossutil command line tool:
+```bash
+ossutil mb oss://as-storage -e oss-[region].aliyuncs.com
+```
+
+Finally create a CDN domain name pointing to the SLB public ip by following this [documentation](https://www.alibabacloud.com/help/doc-detail/27116.htm?spm=a3c0i.o27115en.b99.22.5851d5afSXJzo8)
