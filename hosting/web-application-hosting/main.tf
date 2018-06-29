@@ -130,10 +130,9 @@ resource "alicloud_security_group_rule" "allow_app_access" {
 resource "alicloud_db_instance" "default" {
     engine = "${var.db_engine}"
     engine_version = "${var.db_engine_version}"
-    db_instance_class = "${var.db_instance_type}"
-    db_instance_storage = "${var.db_instance_storage}"
+    instance_type = "${var.db_instance_type}"
+    instance_storage = "${var.db_instance_storage}"
 
-    db_instance_net_type = "Intranet"
     instance_network_type = "VPC"
 
     vswitch_id = "${alicloud_vswitch.db.id}"
