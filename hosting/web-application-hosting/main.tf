@@ -42,7 +42,7 @@ resource "alicloud_slb" "web" {
   internet_charge_type = "paybytraffic"
 }
 
- resource "alicloud_slb_listener" {
+ resource "alicloud_slb_listener" "web" {
    load_balancer_id = "${alicloud_slb.web.id}"
    backend_port     = "${var.web_instance_port}"
    frontend_port    = "${var.web_instance_port}"
@@ -92,7 +92,7 @@ resource "alicloud_slb" "app" {
   vswitch_id = "${alicloud_vswitch.app.id}"
 }
 
- resource "alicloud_slb_listener" {
+ resource "alicloud_slb_listener" "app" {
    load_balancer_id = "${alicloud_slb.app.id}"
    backend_port     = "${var.app_instance_port}"
    frontend_port    = "${var.app_instance_port}"
