@@ -26,13 +26,11 @@ resource "alicloud_instance" "web" {
   count                      = "${var.web_instance_count}"
   instance_name              = "${var.web_layer_name}-${count.index}-srv"
   instance_type              = "${var.web_instance_type}"
-  io_optimized               = "optimized"
   system_disk_category       = "cloud_efficiency"
   image_id                   = "${var.web_instance_image_id}"
 
   availability_zone          = "${var.region}${var.web_availability_zone}"
   vswitch_id                 = "${alicloud_vswitch.web.id}"
-  allocate_public_ip         = false
 
   security_groups            = ["${alicloud_security_group.web.id}"]
   user_data                  = "${var.web_instance_user_data}"
@@ -78,13 +76,11 @@ resource "alicloud_instance" "app" {
   count                      = "${var.app_instance_count}"
   instance_name              = "${var.app_layer_name}-${count.index}-srv"
   instance_type              = "${var.app_instance_type}"
-  io_optimized               = "optimized"
   system_disk_category       = "cloud_efficiency"
   image_id                   = "${var.app_instance_image_id}"
 
   availability_zone          = "${var.region}${var.app_availability_zone}"
   vswitch_id                 = "${alicloud_vswitch.app.id}"
-  allocate_public_ip         = false
 
   security_groups            = ["${alicloud_security_group.app.id}"]
   user_data                  = "${var.app_instance_user_data}"
