@@ -40,16 +40,15 @@ resource "alicloud_slb" "web" {
   name        = "${var.web_layer_name}-slb"
   internet    = true
   internet_charge_type = "paybytraffic"
-
-  listener = [
-    {
-      "instance_port" = "${var.web_instance_port}"
-      "lb_port"       = "${var.web_instance_port}"
-      "lb_protocol"   = "http"
-      "bandwidth"     = "5"
-    }
-  ]
 }
+
+ resource "alicloud_slb_listener" {
+   load_balancer_id = "${alicloud_slb.web.id}"
+   backend_port     = "${var.web_instance_port}"
+   frontend_port    = "${var.web_instance_port}"
+   protocol         = "http"
+   bandwidth        = "5"
+ }
 
 resource "alicloud_slb_attachment" "web" {
   load_balancer_id    = "${alicloud_slb.web.id}"
@@ -91,16 +90,15 @@ resource "alicloud_slb" "app" {
   internet    = false
   internet_charge_type = "paybytraffic"
   vswitch_id = "${alicloud_vswitch.app.id}"
-
-  listener = [
-    {
-      "instance_port" = "${var.app_instance_port}"
-      "lb_port"       = "${var.app_instance_port}"
-      "lb_protocol"   = "tcp"
-      "bandwidth"     = "5"
-    }
-  ]
 }
+
+ resource "alicloud_slb_listener" {
+   load_balancer_id = "${alicloud_slb.app.id}"
+   backend_port     = "${var.app_instance_port}"
+   frontend_port    = "${var.app_instance_port}"
+   protocol         = "http"
+   bandwidth        = "5"
+ }
 
 resource "alicloud_slb_attachment" "app" {
   load_balancer_id    = "${alicloud_slb.app.id}"
@@ -128,8 +126,6 @@ resource "alicloud_db_instance" "default" {
     engine_version = "${var.db_engine_version}"
     instance_type = "${var.db_instance_type}"
     instance_storage = "${var.db_instance_storage}"
-
-    instance_network_type = "VPC"
 
     vswitch_id = "${alicloud_vswitch.db.id}"
     security_ips = ["10.0.2.0/24"]
