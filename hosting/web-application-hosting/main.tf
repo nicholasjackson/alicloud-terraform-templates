@@ -43,11 +43,12 @@ resource "alicloud_slb" "web" {
 }
 
  resource "alicloud_slb_listener" "web" {
-   load_balancer_id = "${alicloud_slb.web.id}"
-   backend_port     = "${var.web_instance_port}"
-   frontend_port    = "${var.web_instance_port}"
-   protocol         = "http"
-   bandwidth        = "5"
+   load_balancer_id          = "${alicloud_slb.web.id}"
+   backend_port              = "${var.web_instance_port}"
+   frontend_port             = "${var.web_instance_port}"
+   health_check_connect_port = "${var.web_instance_port}"
+   protocol                  = "http"
+   bandwidth                 = "5"
  }
 
 resource "alicloud_slb_attachment" "web" {
@@ -93,11 +94,12 @@ resource "alicloud_slb" "app" {
 }
 
  resource "alicloud_slb_listener" "app" {
-   load_balancer_id = "${alicloud_slb.app.id}"
-   backend_port     = "${var.app_instance_port}"
-   frontend_port    = "${var.app_instance_port}"
-   protocol         = "http"
-   bandwidth        = "5"
+   load_balancer_id          = "${alicloud_slb.app.id}"
+   backend_port              = "${var.app_instance_port}"
+   frontend_port             = "${var.app_instance_port}"
+   health_check_connect_port = "${var.app_instance_port}"
+   protocol                  = "http"
+   bandwidth                 = "5"
  }
 
 resource "alicloud_slb_attachment" "app" {
