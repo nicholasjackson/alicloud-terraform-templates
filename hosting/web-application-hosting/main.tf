@@ -1,10 +1,3 @@
-provider "alicloud" {
-  access_key = "${var.access_key_id}"
-  secret_key = "${var.access_key_secret}"
-  region     = "${var.region}"
-  version    = "~> 0.1"
-}
-
 resource "alicloud_vpc" "default" {
   name        = "${var.solution_name}-vpc"
   description = "VPC for hosting ${var.solution_name} solution"
