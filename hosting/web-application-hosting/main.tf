@@ -54,8 +54,8 @@ resource "alicloud_slb" "web" {
 }
 
 resource "alicloud_slb_attachment" "web" {
-  slb_id    = "${alicloud_slb.web.id}"
-  instances = ["${alicloud_instance.web.*.id}"]
+  load_balancer_id    = "${alicloud_slb.web.id}"
+  instance_ids = ["${alicloud_instance.web.*.id}"]
 }
 
 resource "alicloud_security_group" "web" {
@@ -107,8 +107,8 @@ resource "alicloud_slb" "app" {
 }
 
 resource "alicloud_slb_attachment" "app" {
-  slb_id    = "${alicloud_slb.app.id}"
-  instances = ["${alicloud_instance.app.*.id}"]
+  loadbalncer_id    = "${alicloud_slb.app.id}"
+  instance_ids = ["${alicloud_instance.app.*.id}"]
 }
 
 resource "alicloud_security_group" "app" {
