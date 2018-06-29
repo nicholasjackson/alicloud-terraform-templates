@@ -1,3 +1,5 @@
+variable "region" {}
+
 variable "solution_name" {}
 
 variable "web_layer_name" {}
