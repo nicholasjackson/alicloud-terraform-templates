@@ -1,7 +1,3 @@
-variable "access_key_id" {}
-variable "access_key_secret" {}
-variable "region" {}
-
 variable "solution_name" {}
 
 variable "web_layer_name" {}
