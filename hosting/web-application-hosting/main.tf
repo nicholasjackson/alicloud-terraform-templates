@@ -107,7 +107,7 @@ resource "alicloud_slb" "app" {
 }
 
 resource "alicloud_slb_attachment" "app" {
-  loadbalncer_id    = "${alicloud_slb.app.id}"
+  load_balancer_id    = "${alicloud_slb.app.id}"
   instance_ids = ["${alicloud_instance.app.*.id}"]
 }
 
